@@ -11,11 +11,12 @@ fonction de sa perception stéréoscopique fournie par deux caméras PtGrey.
 # Compiler le code
 
 Le code peut être simplement compiler à l'aide des instructions suivantes:
-
-   mkdir build
-   cd build
-   cmake ..
-   make
+```
+mkdir build
+cd build
+cmake ..
+make
+```
 
 Seule une partie du code est compilé pour éviter qu'il soit nécessaire
 d'installer la bibliothèque *flycapture*. Afin de compiler l'ensemble du code,
