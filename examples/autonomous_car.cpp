@@ -29,13 +29,6 @@ void usage(char ** argv)
   exit(EXIT_FAILURE);
 }
 
-void saveImage(const cv::Mat & img, const std::string & side, int no)
-{
-  std::ostringstream oss;
-  oss << side << "_" << no << ".png";
-  cv::imwrite(oss.str(), img);
-}
-
 int main(int argc, char ** argv)
 {
   // Checking args
@@ -98,18 +91,11 @@ int main(int argc, char ** argv)
     controller->process(left_img, right_img, &vx, &vy, &omega);
     cc.setSpeed(vx, vy, omega);
 
-    saveImage(left_img, "left", image_id);
-    saveImage(right_img, "right", image_id);
-
     // Computing elapsed time
     tick_end = steady_clock::now();
     double elapsed_ticks = (tick_end - tick_start).count();
     double elapsed_secs = elapsed_ticks * steady_clock::period::num / steady_clock::period::den;
     int elapsed_us = (int)(elapsed_secs * 1000*1000);
-
-    // Debug
-    std::cout << "Image " << (image_id+1) << "/" << nb_images
-              << ": processed in " << elapsed_secs << "[s]" << std::endl;
 
     // Computing sleeping time
     int sleeping_us = period_us - elapsed_us;
