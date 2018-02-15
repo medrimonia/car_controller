@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 
   // Initialize car
   CarController cc("/dev/ttyUSB0");
-  std::cout << "Connexion with car established" << std::endl;
+  std::cout << "Connexion with car is established" << std::endl;
 
   // Initialize camera
   FlyCapture2::PGRGuid left_guid, right_guid;
@@ -66,11 +66,12 @@ int main(int argc, char ** argv)
   left_guid.value[2] = 2627711216;
   left_guid.value[3] = 2463930288;
   // Right camera GUID
-  right_guid.value[0] = 932990310;
-  right_guid.value[1] = 323408622;
-  right_guid.value[2] = 1096954096;
+  right_guid.value[0] = 3996164526;
+  right_guid.value[1] = 1217969918;
+  right_guid.value[2] = 3412209904;
   right_guid.value[3] = 2825689008;
   StereoCamera sc(left_guid, right_guid);
+  std::cout << "Starting capture" << std::endl;
   sc.startCapture();
   std::cout << "Connexion with cameras established" << std::endl;
 

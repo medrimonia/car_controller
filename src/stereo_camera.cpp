@@ -18,6 +18,7 @@ void StereoCamera::connect()
     throw std::logic_error("StereoCamera::connect: camera are already connected");
   }
   for (unsigned int id = 0; id < 2; id++) {
+    std::cout << "trying to connect to camera with id: " << id << std::endl;
     FlyCapture2::Error error;
 		error = cameras[id].Connect(&(guids[id]));
 		if (error != FlyCapture2::PGRERROR_OK)
@@ -36,6 +37,7 @@ void StereoCamera::disconnect()
     throw std::logic_error("StereoCamera::disconnect: camera are not connected");
   }
   for (unsigned int id = 0; id < 2; id++) {
+    std::cout << "trying to disconnect from camera with id: " << id << std::endl;
 		cameras[id].Disconnect();
   }
   is_connected = false;
@@ -49,17 +51,10 @@ void StereoCamera::startCapture()
   if (!is_connected) {
     connect();
   }
+  std::cout << "Connected" << std::endl;
   updatePacketProperties();
   updateImageSettings();
   updateProperties();
-  // StartSyncCapture with GigE Cameras is not support (Cf GigECamera.h):
-  // - Another solution needs to be found
-  //FlyCapture2::Error error;
-	//error = FlyCapture2::Camera::StartSyncCapture(2, (const FlyCapture2::Camera**)cameras);
-	//if (error != FlyCapture2::PGRERROR_OK) {
-  //  error.PrintErrorTrace();
-  //  exit(EXIT_FAILURE);
-  //
   for (unsigned int id = 0 ; id < 2; id++) {
     FlyCapture2::Error error;
     error = cameras[id].StartCapture();
