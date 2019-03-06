@@ -3,6 +3,7 @@ set(SOURCES
   fake_controller.cpp
   traj_controller.cpp
   custom_controller.cpp
+  stereo_camera_opencv.cpp
 )
 
 if (USE_FLYCAP)

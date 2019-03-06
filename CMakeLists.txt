@@ -74,3 +74,6 @@ target_link_libraries (TestCar ${LINKED_LIBRARIES} car_controller)
 
 add_executable (TestCustomController examples/test_custom_controller.cpp)
 target_link_libraries (TestCustomController ${LINKED_LIBRARIES} car_controller)
+
+add_executable (TestStereoOpenCV examples/test_stereo_opencv.cpp)
+target_link_libraries (TestStereoOpenCV ${LINKED_LIBRARIES} car_controller)
