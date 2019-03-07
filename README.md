@@ -1,6 +1,12 @@
 Car Controller
 ==============
 
+# Dépendances
+
+```
+sudo apt install cmake libopencv-dev
+```
+
 # Contexte
 
 Ce code est utilisé au sein de l'UE *Projets Technologiques* dispensée en L3 à
