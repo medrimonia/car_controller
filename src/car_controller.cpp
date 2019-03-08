@@ -1,5 +1,7 @@
 #include "car_controller.h"
 
+#include <algorithm>
+
 // Note: Communication protocol is extrapolated from what is available at api/fivebot.py
 //       from repository http://www.github.com/RemiFabre/FiveBot
 
@@ -50,12 +52,18 @@ CarController::CarController(const std::string & port, int baudrate)
 
 void CarController::setSpeed(float vx, float vy, float omega)
 {
+  // Bounding speeds (Currently done in a brutal way)
+  float max_speed = 0.3;
+  vx = std::min(max_speed, std::max(-max_speed, vx));
+  vy = std::min(max_speed, std::max(-max_speed, vy));
+  omega = std::min(max_speed, std::max(-max_speed, omega));
+  
   // Ratios used for conversion between robot speed and values used for robot
   // control
   // TODO: those values are experimental, they definitely need to be corrected
-  double vx_ratio = -0.1;
-  double vy_ratio = -0.1;
-  double omega_ratio = 0.1;
+  double vx_ratio = -20;
+  double vy_ratio = -20;
+  double omega_ratio = 20;
   // Changing signs for speed
   vx = vx_ratio * vx;
   vy = vy_ratio * vy;
